@@ -1,3 +1,10 @@
+/*
+ * MI2C_program.c
+ *
+ *  Created on: ??ţ/??ţ/????
+ *      Author: H
+ */
+
 #include "LSTD_TYPES.h"
 
 #include "MI2C_interface.h"
