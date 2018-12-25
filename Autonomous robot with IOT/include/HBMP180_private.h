@@ -1,16 +1,16 @@
 /*
  * HBMP180_private.h
  *
- *  Created on: ??þ/??þ/????
+ *  Created on: ??Ã¾/??Ã¾/????
  *      Author: H
  */
 
 #ifndef HBMP180_PRIVATE_H_
 #define HBMP180_PRIVATE_H_
 
-#define HBMP180_ADDR (0x77<<1) //0x77 default I2C address
+#define HBMP180_ADDR (0x77<<1) 
 
-#define HBMP180_I2CINIT 1 //init i2c
+#define HBMP180_I2CINIT 1 
 
 //registers
 #define HBMP180_REGAC1 0xAA
@@ -48,9 +48,7 @@
 
 
 #define HBMP180_AVARAGECOEF 21
-//variables
-s16 HBMP180_regac1, HBMP180_regac2, HBMP180_regac3, HBMP180_regb1, HBMP180_regb2, HBMP180_regmb, HBMP180_regmc, HBMP180_regmd;
-u16 HBMP180_regac4, HBMP180_regac5, HBMP180_regac6;
-s32 HBMP180_rawtemperature, HBMP180_rawpressure;
+
+
 
 #endif /* HBMP180_PRIVATE_H_ */
