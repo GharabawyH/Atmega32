@@ -12,6 +12,8 @@
 
 #include "LASCII_CONVERT.h"
 
+/*Please be noticed that in orders to use this correctly you have to 
+replace each sentence begining with "your" with the correct actual data*/
 
 volatile u8*Temperature;
 volatile u8*Altitude;
@@ -41,7 +43,7 @@ void HESP_SendData(f64 Temp , u16 Press , f64 Alt , u8 Hum)
 {
 	MUART_Transmit("AT+CIPSEND=the no of characters you're going to send\r\n");
 	_delay_ms(500);
-	MUART_Transmit("POST /file.php HTTP/1.1\r\nHost: your host\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 72\r\n\r\nTemperature=");
+	MUART_Transmit("POST /your file.php HTTP/1.1\r\nHost: your host\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 72\r\n\r\nTemperature=");
 	Temperature = FloatToAscii(Temp);
 	MUART_Transmit(Temperature);
 	MUART_Transmit("C&Pressure=");
