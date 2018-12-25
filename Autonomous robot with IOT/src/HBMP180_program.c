@@ -17,6 +17,10 @@
 
 #include "MI2C_interface.h"
 
+s16 HBMP180_regac1, HBMP180_regac2, HBMP180_regac3, HBMP180_regb1, HBMP180_regb2, HBMP180_regmb, HBMP180_regmc, HBMP180_regmd;
+u16 HBMP180_regac4, HBMP180_regac5, HBMP180_regac6;
+s32 HBMP180_rawtemperature, HBMP180_rawpressure;
+
 
 void HBMP180_writemem(u8 reg, u8 value)
 {
