@@ -12,16 +12,19 @@
 volatile u32 Pressure;
 volatile f64 Temp;
 volatile f64 Altitude;
-volatile u8 S , S1;
+volatile u8 S , S1;/*Those two variables were used to debug the operation of the DHT11*/
 volatile u8 Humidity;
 volatile u64 Pulse;
 volatile u64 Distance;
 
 void Task1(void)
 {
-	HDHT11_SetupForDataReceive();
-	HDHT11_CalculateData();
-	Humidity = HDHT11_GetHumidity();
+	S  = HDHT11_SetupForDataReceive();
+	S1 = HDHT11_CalculateData();
+	if( (S | S1) == 0)
+	{
+		Humidity = HDHT11_GetHumidity();
+	}
 	Temp 	 = HBMP180_gettemperature();
 	Pressure = HBMP180_getpressure();
 	Altitude = HBMP180_getaltitude();
