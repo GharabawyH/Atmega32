@@ -4,7 +4,7 @@
 
 #define F_CPU	8000000
 
-#include <avr/delay.h>
+#include <util/delay.h>
 
 #include "HESP_private.h"
 
