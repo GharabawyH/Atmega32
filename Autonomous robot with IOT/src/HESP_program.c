@@ -19,18 +19,6 @@ volatile u8*Pressure;
 volatile u8*Humidity;
 
 
-//void _delay_ms(u32 volatile time)
-//{
-//	u32 volatile num1=900;
-//	u32 volatile time1 = num1*time;
-//	while(time1)
-//	{
-//		time1--;
-//	}
-//}
-
-
-
 
 void HESP_INIT(void)
 {
@@ -39,21 +27,21 @@ void HESP_INIT(void)
 	_delay_ms(500);
 	MUART_Transmit("AT+CWQAP\r\n");
 	_delay_ms(1000);
-	MUART_Transmit("AT+CWJAP=\"Elgharbawy\",\"lumberjack\"\r\n");
+	MUART_Transmit("AT+CWJAP=\"your ssid\",\"your ssid password\"\r\n");
 	_delay_ms(5000);
 }
 
 void HESP_ConnectToHost(void)
 {
-	MUART_Transmit("AT+CIPSTART=\"TCP\",\"esp8266stm32f103.000webhostapp.com\",80\r\n");
+	MUART_Transmit("AT+CIPSTART=\"TCP\",\"your host\",80\r\n");
 	_delay_ms(500);
 }
 
 void HESP_SendData(f64 Temp , u16 Press , f64 Alt , u8 Hum)
 {
-	MUART_Transmit("AT+CIPSEND=215\r\n");
+	MUART_Transmit("AT+CIPSEND=the no of characters you're going to send\r\n");
 	_delay_ms(500);
-	MUART_Transmit("POST /esppost.php HTTP/1.1\r\nHost: esp8266stm32f103.000webhostapp.com\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 72\r\n\r\nTemperature=");
+	MUART_Transmit("POST /file.php HTTP/1.1\r\nHost: your host\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 72\r\n\r\nTemperature=");
 	Temperature = FloatToAscii(Temp);
 	MUART_Transmit(Temperature);
 	MUART_Transmit("C&Pressure=");
