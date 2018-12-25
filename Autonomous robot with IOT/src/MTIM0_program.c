@@ -1,7 +1,7 @@
 /*
  * MTIM0_program.c
  *
- *  Created on: ??þ/??þ/????
+ *  Created on: ??Ã¾/??Ã¾/????
  *      Author: H
  */
 
@@ -14,11 +14,11 @@ void (*MTIM0_CallBack)(void);
 
 void MTIM0_Initialize(void)
 {
-	TCCR0  = 0x0D ;
-	TIMSK |= 1 << 1;
-	TIFR  |= 1 << 1;
-	OCR0   = 79;
-	SREG  |= 1<<7;
+	TCCR0  = 0x0D ;/*Initialize Timer 0 with 1024 prescaler in CTC mode*/
+	TIMSK |= 1 << 1;/*Enable Timer 0 Output Compare Match Interrupt*/
+	TIFR  |= 1 << 1;/*Clear Timer 0 Output Compare Match Interrupt Flag*/
+	OCR0   = 79;/*Set to reach TOP after 10ms*/
+	SREG  |= 1<<7;/*Enable global interrupt*/
 }
 
 ISR(TIMER0_COMP_vect)
