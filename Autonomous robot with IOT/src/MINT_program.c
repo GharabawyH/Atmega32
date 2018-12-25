@@ -1,7 +1,7 @@
 /*
  * MINT_program.c
  *
- *  Created on: ??þ/??þ/????
+ *  Created on: ??Å£/??Å£/????
  *      Author: H
  */
 
@@ -11,7 +11,7 @@
 #include "MINT_private.h"
 #include <avr/interrupt.h>
 
-void(*MINT_CallBack)(void);
+void(*MINT0_CallBack)(void);
 
 void MINT_Initialize(u8 InterruptNum , u8 Trigger)
 {
@@ -47,11 +47,11 @@ void MINT_Initialize(u8 InterruptNum , u8 Trigger)
 
 ISR(INT0_vect)
 {
-	MINT_CallBack();
+	MINT0_CallBack();
 }
 
 
 void MINT0_SetCallBack(void(*ptr)(void))
 {
-	MINT_CallBack = ptr;
+	MINT0_CallBack = ptr;
 }
