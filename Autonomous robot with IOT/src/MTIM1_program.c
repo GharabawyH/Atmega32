@@ -11,12 +11,12 @@ void (*MTIM1_CallBack)(void);
 void MTIM1_Initialize(void)
 {
 	TCCR1A = 0x00;
-	TCCR1B = 0x01;
-//	OCR1A  = 1565;
-//	OCR1B  = 25000;
-//	TIMSK |= 0x10;
-//	TIFR  |= 0x10;
-	SREG  |= 1<<7;
+	TCCR1B = 0x01;/*Initialize Timer 1 with no prescaler*/
+/*	OCR1A  = 1565;
+	OCR1B  = 25000;
+	TIMSK |= 0x10;
+	TIFR  |= 0x10;
+	SREG  |= 1<<7;*/
 	TCNT1 = 0;
 }
 
