@@ -9,9 +9,9 @@
 #define HBMP180_INTERFACE_H_
 
 
-extern void HBMP180_init();
-extern s32 HBMP180_getpressure();
-extern f64 HBMP180_getaltitude();
-extern f64 HBMP180_gettemperature();
+void HBMP180_init();
+s32 HBMP180_getpressure();
+f64 HBMP180_getaltitude();
+f64 HBMP180_gettemperature();
 
 #endif /* HBMP180_INTERFACE_H_ */
