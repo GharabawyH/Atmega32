@@ -1,7 +1,7 @@
 /*
  * HBMP180_interface.h
  *
- *  Created on: ??þ/??þ/????
+ *  Created on: ??Ã¾/??Ã¾/????
  *      Author: H
  */
 
@@ -9,7 +9,6 @@
 #define HBMP180_INTERFACE_H_
 
 
-//functions
 extern void HBMP180_init();
 extern s32 HBMP180_getpressure();
 extern f64 HBMP180_getaltitude();
