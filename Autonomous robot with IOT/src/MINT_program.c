@@ -25,8 +25,8 @@ void MINT_Initialize(u8 InterruptNum , u8 Trigger)
 					case FallingEdge	: MCUCR |= 0x2;break;
 					case LogicalChange	: MCUCR |= 0x1;break;
 				}
-				GICR |= 1 << 6;
-				GIFR |= 1 << 6;
+				GICR |= 1 << 6;/*Enable External interrupt 0 request*/
+				GIFR |= 1 << 6;/*Clear External interrupt 0 flag*/
 				break;
 			}
 			case INT1:
@@ -37,12 +37,12 @@ void MINT_Initialize(u8 InterruptNum , u8 Trigger)
 					case FallingEdge	: MCUCR |= 0x8;break;
 					case LogicalChange	: MCUCR |= 0x4;break;
 				}
-				GICR |= 1 << 7;
-				GIFR |= 1 << 7;
+				GICR |= 1 << 7;/*Enable External interrupt 1 request*/
+				GIFR |= 1 << 7;/*Clear External interrupt 1 flag*/
 				break;
 			}
 		}
-		SREG |= 1<<7;
+		SREG |= 1<<7;/*Enable global interrupt*/
 }
 
 ISR(INT0_vect)
