@@ -12,7 +12,7 @@
 volatile u32 Pressure;
 volatile f64 Temp;
 volatile f64 Altitude;
-volatile u8 S , S1;/*Those two variables were used to debug the operation of the DHT11*/
+volatile u8 S , S1;/*Those two variables are used to debug the operation of the DHT11*/
 volatile u8 Humidity;
 volatile u64 Pulse;
 volatile u64 Distance;
