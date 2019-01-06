@@ -19,6 +19,8 @@ volatile u64 Distance;
 
 void Task1(void)
 {
+	HMOTOR_Stop(LEFT_MOTOR);
+	HMOTOR_Stop(RIGHT_MOTOR);
 	S  = HDHT11_SetupForDataReceive();
 	S1 = HDHT11_CalculateData();
 	if( (S | S1) == 0)
@@ -30,6 +32,8 @@ void Task1(void)
 	Altitude = HBMP180_getaltitude();
 	HESP_ConnectToHost();
 	HESP_SendData(Temp , Pressure , Altitude , Humidity);
+	HMOTOR_Enable(LEFT_MOTOR);
+	HMOTOR_Enable(RIGHT_MOTOR);
 }
 
 void Task2(void)
