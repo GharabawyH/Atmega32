@@ -196,11 +196,11 @@ f64 HBMP180_getaltitude()
  */
 void HBMP180_init()
 {
-#if HBMP180_I2CINIT == 1
+
 	//init i2c
 	MI2C_init();
 	_delay_us(10);
-#endif
+
 
 	HBMP180_getcalibration(); //get calibration data
 	HBMP180_getrawtemperature(); //update raw temperature, at least the first time
