@@ -1,7 +1,7 @@
 /*
  * HULTRASONIC_program.c
  *
- *  Created on: ??˛/??˛/????
+ *  Created on: ??‚Äè/??‚Äè/????
  *      Author: H
  */
 
@@ -15,7 +15,7 @@
 
 void HULTRASONIC_Initialize(void)
 {
-	MTIM1_Initialize();
+	//	MTIM1_Initialize();
 	MDIO_SetPinDirection(DIO_DDRD , DIO_u8Pin2 , DIO_LOW);
 	MDIO_SetPinDirection(DIO_DDRB , DIO_u8Pin0 , DIO_HIGH);
 	MINT_Initialize(MINT0 , RisingEdge);
@@ -28,7 +28,7 @@ void HULTRASONIC_SendTrigger(void)
 	MDIO_WritePinValue(DIO_PORTB , DIO_u8Pin0 , DIO_LOW);
 }
 
-u16 HULTRASONIC_CalculateDistance(void)
+u64 HULTRASONIC_CalculateDistance(void)
 {
 	u8 Count = 0;
 	u64 OverFlow = 0;
