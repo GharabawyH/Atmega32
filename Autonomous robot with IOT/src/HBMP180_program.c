@@ -1,24 +1,22 @@
 /*
- * HBMP180_program.c
- *
- *  Created on: ??ţ/??ţ/????
- *      Author: H
+HBMP180 lib 0x01
+
+copyright (c) Davide Gironi, 2012
+
+Released under GPLv3.
+Please refer to LICENSE file for licensing information.
  */
-
-
 
 #include "LSTD_TYPES.h"
 #include <util/delay.h>
 #include <math.h>
 #include "HBMP180_private.h"
-
 #include "HBMP180_interface.h"
-
-
 #include "MI2C_interface.h"
 
-volatile s16 HBMP180_regac1, HBMP180_regac2, HBMP180_regac3, HBMP180_regb1, HBMP180_regb2, HBMP180_regmb, HBMP180_regmc, HBMP180_regmd;
-volatile u16 HBMP180_regac4, HBMP180_regac5, HBMP180_regac6;
+
+volatile s16 HBMP180_AC1, HBMP180_AC2, HBMP180_AC3, HBMP180_B1, HBMP180_B2, HBMP180_MB, HBMP180_MC, HBMP180_MD;
+volatile u16 HBMP180_AC4, HBMP180_AC5, HBMP180_AC6;
 volatile s32 HBMP180_rawtemperature, HBMP180_rawpressure;
 
 
@@ -49,22 +47,21 @@ void HBMP180_readmem(u8 reg, u8 buff[], u8 bytes)
 
 
 #if HBMP180_FILTERPRESSURE == 1
-#define HBMP180_AVARAGECOEF 21
-static s32 k[HBMP180_AVARAGECOEF];
+static s32 k[HBMP180_AVERAGECOEF];
 s32 HBMP180_avaragefilter(s32 input)
 {
 	u8 i=0;
 	s32 sum=0;
-	for (i=0; i<HBMP180_AVARAGECOEF; i++)
+	for (i=0; i<HBMP180_AVERAGECOEF; i++)
 	{
 		k[i] = k[i+1];
 	}
-	k[HBMP180_AVARAGECOEF-1] = input;
-	for (i=0; i<HBMP180_AVARAGECOEF; i++)
+	k[HBMP180_AVERAGECOEF-1] = input;
+	for (i=0; i<HBMP180_AVERAGECOEF; i++)
 	{
 		sum += k[i];
 	}
-	return (sum /HBMP180_AVARAGECOEF) ;
+	return (sum /HBMP180_AVERAGECOEF) ;
 }
 #endif
 
@@ -76,27 +73,27 @@ void HBMP180_getcalibration()
 	u8 buff[2];
 
 	HBMP180_readmem(HBMP180_REGAC1, buff, 2);
-	HBMP180_regac1 = ((s16)buff[0] <<8 | ((s16)buff[1]));
+	HBMP180_AC1 = ((s16)buff[0] <<8 | ((s16)buff[1]));
 	HBMP180_readmem(HBMP180_REGAC2, buff, 2);
-	HBMP180_regac2 = ((s16)buff[0] <<8 | ((s16)buff[1]));
+	HBMP180_AC2 = ((s16)buff[0] <<8 | ((s16)buff[1]));
 	HBMP180_readmem(HBMP180_REGAC3, buff, 2);
-	HBMP180_regac3 = ((s16)buff[0] <<8 | ((s16)buff[1]));
+	HBMP180_AC3 = ((s16)buff[0] <<8 | ((s16)buff[1]));
 	HBMP180_readmem(HBMP180_REGAC4, buff, 2);
-	HBMP180_regac4 = ((u16)buff[0] <<8 | ((u16)buff[1]));
+	HBMP180_AC4 = ((u16)buff[0] <<8 | ((u16)buff[1]));
 	HBMP180_readmem(HBMP180_REGAC5, buff, 2);
-	HBMP180_regac5 = ((u16)buff[0] <<8 | ((u16)buff[1]));
+	HBMP180_AC5 = ((u16)buff[0] <<8 | ((u16)buff[1]));
 	HBMP180_readmem(HBMP180_REGAC6, buff, 2);
-	HBMP180_regac6 = ((u16)buff[0] <<8 | ((u16)buff[1]));
+	HBMP180_AC6 = ((u16)buff[0] <<8 | ((u16)buff[1]));
 	HBMP180_readmem(HBMP180_REGB1, buff, 2);
-	HBMP180_regb1 = ((s16)buff[0] <<8 | ((s16)buff[1]));
+	HBMP180_B1 = ((s16)buff[0] <<8 | ((s16)buff[1]));
 	HBMP180_readmem(HBMP180_REGB2, buff, 2);
-	HBMP180_regb2 = ((s16)buff[0] <<8 | ((s16)buff[1]));
+	HBMP180_B2 = ((s16)buff[0] <<8 | ((s16)buff[1]));
 	HBMP180_readmem(HBMP180_REGMB, buff, 2);
-	HBMP180_regmb = ((s16)buff[0] <<8 | ((s16)buff[1]));
+	HBMP180_MB = ((s16)buff[0] <<8 | ((s16)buff[1]));
 	HBMP180_readmem(HBMP180_REGMC, buff, 2);
-	HBMP180_regmc = ((s16)buff[0] <<8 | ((s16)buff[1]));
+	HBMP180_MC = ((s16)buff[0] <<8 | ((s16)buff[1]));
 	HBMP180_readmem(HBMP180_REGMD, buff, 2);
-	HBMP180_regmd = ((s16)buff[0] <<8 | ((s16)buff[1]));
+	HBMP180_MD = ((s16)buff[0] <<8 | ((s16)buff[1]));
 }
 
 /*
@@ -115,8 +112,8 @@ void HBMP180_getrawtemperature()
 	ut = ((s32)buff[0] << 8 | ((s32)buff[1])); //uncompensated temperature value
 
 	//calculate raw temperature
-	x1 = ((s32)ut - HBMP180_regac6) * HBMP180_regac5 >> 15;
-	x2 = ((s32)HBMP180_regmc << 11) / (x1 + HBMP180_regmd);
+	x1 = ((s32)ut - HBMP180_AC6) * HBMP180_AC5 >> 15;
+	x2 = ((s32)HBMP180_MC << 11) / (x1 + HBMP180_MD);
 	HBMP180_rawtemperature = x1 + x2;
 }
 
@@ -142,14 +139,14 @@ void HBMP180_getrawpressure()
 
 	//calculate raw pressure
 	b6 = HBMP180_rawtemperature - 4000;
-	x1 = (HBMP180_regb2* (b6 * b6) >> 12) >> 11;
-	x2 = (HBMP180_regac2 * b6) >> 11;
+	x1 = (HBMP180_B2* (b6 * b6) >> 12) >> 11;
+	x2 = (HBMP180_AC2 * b6) >> 11;
 	x3 = x1 + x2;
-	b3 = (((((s32)HBMP180_regac1) * 4 + x3) << HBMP180_MODE) + 2) >> 2;
-	x1 = (HBMP180_regac3 * b6) >> 13;
-	x2 = (HBMP180_regb1 * ((b6 * b6) >> 12)) >> 16;
+	b3 = (((((s32)HBMP180_AC1) * 4 + x3) << HBMP180_MODE) + 2) >> 2;
+	x1 = (HBMP180_AC3 * b6) >> 13;
+	x2 = (HBMP180_B1 * ((b6 * b6) >> 12)) >> 16;
 	x3 = ((x1 + x2) + 2) >> 2;
-	b4 = (HBMP180_regac4 * (u32)(x3 + 32768)) >> 15;
+	b4 = (HBMP180_AC4 * (u32)(x3 + 32768)) >> 15;
 	b7 = ((u32)up - b3) * (50000 >> HBMP180_MODE);
 	p = b7 < 0x80000000 ? (b7 << 1) / b4 : (b7 / b4) << 1;
 	x1 = (p >> 8) * (p >> 8);
@@ -162,9 +159,7 @@ void HBMP180_getrawpressure()
 #endif
 }
 
-/*
- * get celsius temperature
- */
+/*get celsius temperature*/
 f64 HBMP180_gettemperature()
 {
 	HBMP180_getrawtemperature();
@@ -173,42 +168,33 @@ f64 HBMP180_gettemperature()
 	return temperature;
 }
 
-/*
- * get pressure
- */
+/*get pressure*/
 s32 HBMP180_getpressure()
 {
 	HBMP180_getrawpressure();
-	return (HBMP180_rawpressure + HBMP180_UNITPAOFFSET)/100;
+	return (HBMP180_rawpressure)/100;
 }
 
-/*
- * get altitude
- */
+/*get altitude*/
 f64 HBMP180_getaltitude()
 {
 	HBMP180_getrawpressure();
-	return (((1 - pow(HBMP180_rawpressure/(f64)101644, 0.1903 )) / 0.0000225577) + HBMP180_UNITMOFFSET);
+	return (((1 - pow(HBMP180_rawpressure/(f64)101938, 0.1903 )) / 0.0000225577));
 }
 
-/*
- * init HBMP180
- */
-void HBMP180_init()
+/*init HBMP180*/
+void HBMP180_Initialize()
 {
-
-	//init i2c
 	MI2C_init();
 	_delay_us(10);
-
 
 	HBMP180_getcalibration(); //get calibration data
 	HBMP180_getrawtemperature(); //update raw temperature, at least the first time
 
 #if HBMP180_FILTERPRESSURE == 1
-	//initialize the avarage filter
+	/*Average filter initialize*/
 	u8 i=0;
-	for (i=0; i<HBMP180_AVARAGECOEF; i++) {
+	for (i=0; i<HBMP180_AVERAGECOEF; i++) {
 		HBMP180_getrawpressure();
 	}
 #endif
