@@ -1,2 +1,2 @@
-# This project has drivers for UART interfacing with ESP8266 ( Send the data to a certain webhost ) , I2C interfacing with BMP180 , External interrupt 0 and Timer 1 interfacing with Ultrasonic Sensor and DIO interfacing with 2 DC Motors and DHT11.
-# It also contains the php file used to upload the data to another file.
+# This project has drivers for ESP8266 interfacing with UART ( Send the data to a certain webhost ) , BMP180 interfacing with I2C , Ultrasonic Sensor interfacing with External interrupt 0 and Timer 1 and 2 DC Motors interfacing with Timer 1 PWM and DHT11 interfacing with DIO.
+# It also contains the php file (backend) used to upload the data to another file.
