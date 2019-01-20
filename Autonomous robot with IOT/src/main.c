@@ -26,7 +26,10 @@ void Task1(void)
 	HMOTOR_Stop(RIGHT_MOTOR);
 	HDHT11_SetupForDataReceive();
 	HDHT11_CalculateData();
+	if( (S | S1) == 0)
+	{
 	Humidity = HDHT11_GetHumidity();
+	}
 	Temp 	 = HBMP180_gettemperature();
 	Pressure = HBMP180_getpressure();
 	Altitude = HBMP180_getaltitude();
