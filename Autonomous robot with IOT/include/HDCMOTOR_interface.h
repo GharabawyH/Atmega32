@@ -1,7 +1,7 @@
 /*
  * HDCMOTOR_interface.h
  *
- *  Created on: ??˛/??˛/????
+ *  Created on: ??‚Äè/??‚Äè/????
  *      Author: H
  */
 
@@ -10,8 +10,9 @@
 
 void HMOTOR_Initialize(void);
 void HMOTOR_Start(u8 Motor , u8 Direction);
-void HMOTOR_Enable(u8 Motor);
+void HMOTOR_NonPWM_Enable(u8 Motor);
 void HMOTOR_Stop(u8 Motor);
+void HMOTOR_PWM_Output(u8 Motor , u16 Speed);
 
 #define LEFT_MOTOR	1
 #define RIGHT_MOTOR	2
