@@ -192,7 +192,8 @@ void HBMP180_Initialize()
 #if HBMP180_FILTERPRESSURE == 1
 	/*Average filter initialize*/
 	u8 i=0;
-	for (i=0; i<HBMP180_AVERAGECOEF; i++) {
+	for (i=0; i<HBMP180_AVERAGECOEF; i++) 
+	{
 		HBMP180_getrawpressure();
 	}
 #endif
