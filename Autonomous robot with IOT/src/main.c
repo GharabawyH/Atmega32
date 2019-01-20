@@ -18,7 +18,7 @@ volatile u8  Humidity;
 volatile u64 Pulse;
 volatile u64 Distance;
 volatile u8  flag;
-volatile u8* Buffer;
+/*volatile u8* Buffer;*/
 
 void Task1(void)
 {
