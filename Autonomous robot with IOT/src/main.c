@@ -24,8 +24,8 @@ void Task1(void)
 {
 	HMOTOR_Stop(LEFT_MOTOR);
 	HMOTOR_Stop(RIGHT_MOTOR);
-	HDHT11_SetupForDataReceive();
-	HDHT11_CalculateData();
+	S  = HDHT11_SetupForDataReceive();
+	S1 = HDHT11_CalculateData();
 	if( (S | S1) == 0)
 	{
 	Humidity = HDHT11_GetHumidity();
