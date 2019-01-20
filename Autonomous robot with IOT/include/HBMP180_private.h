@@ -1,16 +1,16 @@
 /*
  * HBMP180_private.h
  *
- *  Created on: ??þ/??þ/????
+ *  Created on: ??‏/??‏/????
  *      Author: H
  */
 
 #ifndef HBMP180_PRIVATE_H_
 #define HBMP180_PRIVATE_H_
 
-#define HBMP180_ADDR (0x77<<1) 
+#define HBMP180_ADDR (0x77<<1) //0x77 default I2C address
 
-#define HBMP180_I2CINIT 1 
+#define HBMP180_I2CINIT 1 //init i2c
 
 //registers
 #define HBMP180_REGAC1 0xAA
@@ -47,8 +47,7 @@
 #define HBMP180_FILTERPRESSURE 1 //avarage filter for pressure
 
 
-#define HBMP180_AVARAGECOEF 21
-
-
+#define HBMP180_AVERAGECOEF 21
+//variables
 
 #endif /* HBMP180_PRIVATE_H_ */
