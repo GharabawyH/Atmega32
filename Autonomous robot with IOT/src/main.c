@@ -67,8 +67,8 @@ void HULTRASONIC_Decision(void)
 		{
 			HMOTOR_Start(LEFT_MOTOR , Dir2);
 			HMOTOR_Start(RIGHT_MOTOR , Dir1);
-			HMOTOR_PWM_Output(LEFT_MOTOR , 20000);
-			HMOTOR_PWM_Output(RIGHT_MOTOR , 20000);
+			HMOTOR_PWM_Output(LEFT_MOTOR , 40000);
+			HMOTOR_PWM_Output(RIGHT_MOTOR , 40000);
 		}
 	}
 }
